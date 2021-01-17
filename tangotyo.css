@@ -1,0 +1,39 @@
+*{
+  font-family: 'Hiragino Maru Gothic Pro'
+}
+button{
+  background-color: #668beb;
+  color: #ffffff;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  border-style: solid;
+  border-color: #000000;
+  border-radius: 10px;
+}
+button:hover {
+  background: #380faf;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px #668beb;
+}
+a{
+  text-decoration: none;
+  color: #ffffff;
+}
+#content{
+  margin: 32px;
+}
+#question{
+  width:70px;
+  height:70px;
+  background: yellow;
+  border-radius:100%;
+  color: #000000
+}
+#title{
+  border-left: 8px solid #4abdac;
+}
