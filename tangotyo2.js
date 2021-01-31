@@ -1,3 +1,4 @@
+//let mysql = require("mysql");
 let title = document.querySelector("#title");
 let content = document.querySelector("#content");
 const stbtn = document.querySelector("#start");
@@ -14,6 +15,36 @@ let area2;
 let question_array = [];
 let answer_array = [];
 let check = 0;
+
+
+//jsonファイル作成
+let json_maker =(originalData,fileName)=>{
+  //originalData = {
+  //  id: 123,
+  //  name: "mochi",
+  //  food:["mochi","moti"]
+  //};
+  //const fileName = test.json;
+  const data = JSON.stringify(originalData);
+  const link = document.createElement("a");
+  link.href = "data:text/plain," + encodeURIComponent(data);
+  link.download = fileName;
+  link.click();
+}
+
+
+//json読み取り
+let json_reader =()=>{
+  for(let i = 1; i < 4; i++){
+      url = `test${i}.json`;
+
+      $.getJSON(url, (data) => {
+        console.log(`id=${data.id}, name=${data.name}, food=${data.food}`);
+      });
+    }
+}
+
+json_reader();
 
 console.log(quiz)
 console.log(title)
@@ -88,7 +119,11 @@ let edit_quiz_part =()=>{
     console.log(area2);
     console.log(question_array);
     console.log(answer_array);
-
+    json_maker({
+        id: 123,
+        name: "mochi",
+        food:[area1,area2]
+      },"test.json");
   }
   sebtn = document.querySelector("#send_quiz");
   sebtn.addEventListener("click",quiz_make);
