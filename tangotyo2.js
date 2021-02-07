@@ -35,14 +35,12 @@ let json_maker =(originalData,fileName)=>{
 
 //json読み取り
 let json_reader =()=>{
-  for(let i = 1; i < 4; i++){
-      url = `test${i}.json`;
-      url = "https://huitzil040.github.io/tangotyo/test1.json";
+  url = "https://huitzil040.github.io/tangotyo/test1.json";
 
-      $.getJSON(url, (data) => {
-        console.log(data);
-      });
-    }
+  $.getJSON(url, (data) => {
+    console.log(data)
+        //console.log(`id=${data.id}, name=${data.name}, food=${data.food}`);
+  });
 }
 
 json_reader();
