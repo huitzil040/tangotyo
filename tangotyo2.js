@@ -10,10 +10,10 @@ let qubtn;
 let nebtn;
 let enbtn;
 let sebtn;
-let area1;
-let area2;
-let question_array = [];
-let answer_array = [];
+let areaQ;
+let areaA;
+let random;
+let qanda_array = [];
 let check = 0;
 
 
@@ -38,8 +38,16 @@ let json_reader =()=>{
   url = "https://huitzil040.github.io/tangotyo/test1.json";
 
   $.getJSON(url, (data) => {
-    console.log(data)
-        //console.log(`id=${data.id}, name=${data.name}, food=${data.food}`);
+    for (let i=0; i<data.length; i++){
+      console.log(data)
+      console.log(typeof(data[i].question))
+      console.log(`id=${data[i].id}, genre=${data[i].genre_name}, question=${data[i].question}, answer=${data[i].answer}`);
+      areaQ = data[i].question;
+      areaA = data[i].answer;
+      qanda_array.push({areaQ,areaA});
+      //qanda_array += {areaQ:data[i].question, areaA:data[i].answer}
+      console.log(qanda_array)
+    }
   });
 }
 
@@ -52,10 +60,12 @@ console.log(title)
 let start_quiz_part =()=>{
   check = 0;
   //ランダムな問題を出題する変数
-  let random = 0;
+  random = 0;
+  console.log(random);
+  random = qanda_array[random];
   console.log(random)
   title.innerText = "問題";
-  content.innerText = question_array[random];
+  content.innerText = random.areaQ;
   quiz.innerHTML = '<input type="text" id="answer">';
   quiz.innerHTML += '<button type="button" id="question">回答</button>'
   quiz2.textContent = "";
@@ -65,8 +75,9 @@ let start_quiz_part =()=>{
     check = 1;
     title.innerText = "答え合わせ";
     let answer = document.querySelector("#answer").value;
-    let correct = answer_array[random];
+    let correct = random.areaA;
     console.log(answer);
+    console.log(qanda_array);
     content.innerText = 'あなたの回答:'+ answer;
     content.innerHTML += "<br>"
     content.innerText += '答え:'+ correct;
@@ -109,20 +120,18 @@ let edit_quiz_part =()=>{
   console.log(quiz);
   //クイズを作成する
   let quiz_make =()=>{
-    area1 = document.querySelector("#quiz_editer").value;
-    area2 = document.querySelector("#answer_editer").value;
-    question_array.push(area1);
-    answer_array.push(area2);
+    areaQ = document.querySelector("#quiz_editer").value;
+    areaA = document.querySelector("#answer_editer").value;
+    qanda_array.push({areaQ,areaA});
     quiz2.innerText = "登録しました";
-    console.log(area1);
-    console.log(area2);
-    console.log(question_array);
-    console.log(answer_array);
-    json_maker({
-        id: 123,
-        name: "mochi",
-        food:[area1,area2]
-      },"test.json");
+    console.log(areaQ);
+    console.log(areaA);
+    console.log(qanda_array);
+    //json_maker({
+    //    id: 123,
+    //    name: "mochi",
+    //    food:[areaQ,areaA]
+    //  },"test.json");
   }
   sebtn = document.querySelector("#send_quiz");
   sebtn.addEventListener("click",quiz_make);
