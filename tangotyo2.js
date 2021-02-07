@@ -40,7 +40,7 @@ let json_reader =()=>{
       url = "https://huitzil040.github.io/tangotyo/test1.json";
 
       $.getJSON(url, (data) => {
-        console.log(`id=${data.id}, name=${data.name}, food=${data.food}`);
+        console.log(data);
       });
     }
 }
