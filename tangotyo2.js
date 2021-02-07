@@ -12,6 +12,7 @@ let enbtn;
 let sebtn;
 let areaQ;
 let areaA;
+let areaG;
 let random;
 let qanda_array = [];
 let check = 0;
@@ -44,7 +45,8 @@ let json_reader =()=>{
       console.log(`id=${data[i].id}, genre=${data[i].genre_name}, question=${data[i].question}, answer=${data[i].answer}`);
       areaQ = data[i].question;
       areaA = data[i].answer;
-      qanda_array.push({areaQ,areaA});
+      areaG = data[i].genre_name;
+      qanda_array.push({areaQ,areaA,areaG});
       //qanda_array += {areaQ:data[i].question, areaA:data[i].answer}
       console.log(qanda_array)
     }
@@ -60,7 +62,7 @@ console.log(title)
 let start_quiz_part =()=>{
   check = 0;
   //ランダムな問題を出題する変数
-  random = 0;
+  random = Math.floor( Math.random() * qanda_array.length );;
   console.log(random);
   random = qanda_array[random];
   console.log(random)
@@ -114,7 +116,8 @@ let edit_quiz_part =()=>{
   title.innerText = "編集";
   content.textContent = "";
   quiz.innerHTML = '<textarea rows="3" cols="30" id="quiz_editer" placeholder="問題を記入してください"></textarea></br>';
-  quiz.innerHTML += '<textarea rows="3" cols="30" id="answer_editer" placeholder="答えを記入してください"></textarea>';
+  quiz.innerHTML += '<textarea rows="3" cols="30" id="answer_editer" placeholder="答えを記入してください"></textarea></br>';
+  quiz.innerHTML += '<textarea rows="1" cols="30" id="genre_editer" placeholder="ジャンルを記入してください"></textarea>';
   quiz.innerHTML += '<button type="button" id="send_quiz">確定</button>'
   quiz2.textContent = "";
   console.log(quiz);
@@ -122,10 +125,12 @@ let edit_quiz_part =()=>{
   let quiz_make =()=>{
     areaQ = document.querySelector("#quiz_editer").value;
     areaA = document.querySelector("#answer_editer").value;
-    qanda_array.push({areaQ,areaA});
+    areaG = document.querySelector("#genre_editer").value;
+    qanda_array.push({areaQ,areaA,areaG});
     quiz2.innerText = "登録しました";
     console.log(areaQ);
     console.log(areaA);
+    console.log(areaG);
     console.log(qanda_array);
     //json_maker({
     //    id: 123,
