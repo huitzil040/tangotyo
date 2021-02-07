@@ -1,2 +1,12 @@
-{"id":123,"name":"mochi","food":["hutsu","mochi"]}
-{"id":124,"name":"warabimochi","food":["warabi","mochi"]}
+[
+  {
+    "id":123,
+    "name":"mochi",
+    "food":["hutsu","mochi"]
+  },
+  {
+    "id":124,
+    "name":"warabimochi",
+    "food":["warabi","mochi"]
+  }
+]
