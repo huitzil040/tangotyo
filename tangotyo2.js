@@ -10,6 +10,7 @@ let qubtn;
 let nebtn;
 let enbtn;
 let sebtn;
+let dobtn;
 let areaQ;
 let areaA;
 let areaG;
@@ -42,7 +43,7 @@ let json_reader =()=>{
     for (let i=0; i<data.length; i++){
       console.log(data)
       console.log(typeof(data[i].question))
-      console.log(`id=${data[i].id}, genre=${data[i].genre_name}, question=${data[i].question}, answer=${data[i].answer}`);
+      console.log(`genre=${data[i].genre_name}, question=${data[i].question}, answer=${data[i].answer}`);
       areaQ = data[i].question;
       areaA = data[i].answer;
       areaG = data[i].genre_name;
@@ -140,15 +141,20 @@ let edit_quiz_part =()=>{
   }
   sebtn = document.querySelector("#send_quiz");
   sebtn.addEventListener("click",quiz_make);
-  console.log(quiz2);
 }
 
 let option_quiz_part =()=>{
   check = 0;
   title.innerText = "設定";
   content.textContent = "";
-  quiz.textContent = "";
+  quiz.innerText = "問題データのダウンロードは→";
+  quiz.innerHTML += '<button type="button" id="download_quiz">ダウンロード</button>'
   quiz2.textContent = "";
+  let quiz_data_download =()=>{
+    json_maker(qanda_array,"tangotyo_data.json")
+  }
+  dobtn = document.querySelector("#download_quiz");
+  dobtn.addEventListener("click",quiz_data_download);
 }
 
 //「開始する」ボタン
