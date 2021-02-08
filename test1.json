@@ -1,18 +1,15 @@
 [
   {
-    "id":1,
     "genre_name":"mochi",
     "question":"餅は餅でも食べられない餅ってなーんだ？",
     "answer":"絵に描いた餅"
   },
   {
-    "id":2,
     "genre_name":"mochi",
     "question":"餅は餅でも餅がモチモチってなーんだ？",
     "answer":"知らん"
   },
   {
-    "id":3,
     "genre_name":"mochi",
     "question":"餅とは",
     "answer":"餅"
