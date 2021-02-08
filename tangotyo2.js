@@ -14,7 +14,9 @@ let dobtn;
 let areaQ;
 let areaA;
 let areaG;
+let checkR = 0;
 let random;
+let randoms = [];
 let qanda_array = [];
 let check = 0;
 
@@ -41,9 +43,9 @@ let json_reader =()=>{
 
   $.getJSON(url, (data) => {
     for (let i=0; i<data.length; i++){
-      console.log(data)
-      console.log(typeof(data[i].question))
-      console.log(`genre=${data[i].genre_name}, question=${data[i].question}, answer=${data[i].answer}`);
+      //console.log(data)
+      //console.log(typeof(data[i].question))
+      //console.log(`genre=${data[i].genre_name}, question=${data[i].question}, answer=${data[i].answer}`);
       areaQ = data[i].question;
       areaA = data[i].answer;
       areaG = data[i].genre_name;
@@ -54,21 +56,47 @@ let json_reader =()=>{
   });
 }
 
-json_reader();
+let random_maker =()=>{
+  let min = 1, max = qanda_array.length;
 
+  for(i = min; i <= max; i++){
+    while(true){
+      let tmp = intRandom(min, max);
+      if(!randoms.includes(tmp)){
+        randoms.push(tmp);
+        break;
+      }
+    }
+  }
+}
+/** min以上max以下の整数値の乱数を返す */
+function intRandom(min, max){
+  return Math.floor( Math.random() * (max - min + 1)) + min;
+}
+
+json_reader();
 console.log(quiz)
 console.log(title)
 
 //「開始する」ボタンのなかみs
 let start_quiz_part =()=>{
   check = 0;
-  //ランダムな問題を出題する変数
-  random = Math.floor( Math.random() * qanda_array.length );;
+  //配列を順々に使っていき、配列が終わったらもう一度乱数の配列を持ってくる
+  if(checkR == qanda_array.length){
+    checkR = 0;
+  };
+  console.log(checkR)
+  if(checkR == 0){
+    randoms = [];
+    random_maker();
+    console.log(randoms);
+  };
+
+  random = randoms[checkR] - 1;
   console.log(random);
-  random = qanda_array[random];
-  console.log(random)
+  let questionN = qanda_array[random];
   title.innerText = "問題";
-  content.innerText = random.areaQ;
+  content.innerText = (checkR+1)+"/"+qanda_array.length+":   "+questionN.areaQ;
   quiz.innerHTML = '<input type="text" id="answer">';
   quiz.innerHTML += '<button type="button" id="question">回答</button>'
   quiz2.textContent = "";
@@ -78,8 +106,8 @@ let start_quiz_part =()=>{
     check = 1;
     title.innerText = "答え合わせ";
     let answer = document.querySelector("#answer").value;
-    let correct = random.areaA;
-    console.log(answer);
+    let correct = questionN.areaA;
+    //console.log(answer);
     console.log(qanda_array);
     content.innerText = 'あなたの回答:'+ answer;
     content.innerHTML += "<br>"
@@ -90,11 +118,14 @@ let start_quiz_part =()=>{
     //「次の問題」ボタン
     let next_quiz=()=>{
       check = 0;
+      checkR = checkR + 1;
       start_quiz()
     }
     //「終わり」ボタン
     let end_quiz=()=>{
       check = 0;
+      checkR = 0;
+      randoms = [];
       title.textContent = "";
       content.textContent = "";
       quiz.textContent = "";
