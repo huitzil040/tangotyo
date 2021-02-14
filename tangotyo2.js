@@ -13,7 +13,8 @@ let sebtn;
 let dobtn;
 let areaQ;
 let areaA;
-let areaG;
+let areaGS;
+let areaGB;
 let checkR = 0;
 let random;
 let randoms = [];
@@ -48,8 +49,9 @@ let json_reader =()=>{
       //console.log(`genre=${data[i].genre_name}, question=${data[i].question}, answer=${data[i].answer}`);
       areaQ = data[i].question;
       areaA = data[i].answer;
-      areaG = data[i].genre_name;
-      qanda_array.push({areaQ,areaA,areaG});
+      areaGS = data[i].genre_nameS;
+      areaaB = data[i].genre_nameB;
+      qanda_array.push({areaQ,areaA,areaGS,areaGB});
       //qanda_array += {areaQ:data[i].question, areaA:data[i].answer}
       console.log(qanda_array)
     }
@@ -149,7 +151,8 @@ let edit_quiz_part =()=>{
   content.textContent = "";
   quiz.innerHTML = '<textarea rows="3" cols="30" id="quiz_editer" placeholder="問題を記入してください"></textarea></br>';
   quiz.innerHTML += '<textarea rows="3" cols="30" id="answer_editer" placeholder="答えを記入してください"></textarea></br>';
-  quiz.innerHTML += '<textarea rows="1" cols="30" id="genre_editer" placeholder="ジャンルを記入してください"></textarea>';
+  quiz.innerHTML += '<textarea rows="1" cols="30" id="genreS_editer" placeholder="小ジャンルを記入してください"></textarea>';
+  quiz.innerHTML += '<textarea rows="1" cols="30" id="genreB_editer" placeholder="大ジャンルを記入してください"></textarea>';
   quiz.innerHTML += '<button type="button" id="send_quiz">確定</button>'
   quiz2.textContent = "";
   console.log(quiz);
@@ -157,12 +160,13 @@ let edit_quiz_part =()=>{
   let quiz_make =()=>{
     areaQ = document.querySelector("#quiz_editer").value;
     areaA = document.querySelector("#answer_editer").value;
-    areaG = document.querySelector("#genre_editer").value;
-    qanda_array.push({areaQ,areaA,areaG});
+    areaGS = document.querySelector("#genreS_editer").value;
+    areaGB = document.querySelector("#genreB_editer").value;
+    qanda_array.push({areaQ,areaA,areaGS,areaGB});
     quiz2.innerText = "登録しました";
     console.log(areaQ);
     console.log(areaA);
-    console.log(areaG);
+    console.log(areaGS);
     console.log(qanda_array);
     //json_maker({
     //    id: 123,
