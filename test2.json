@@ -1,9 +1,9 @@
 [
   {
 
-    "genre_name_#mochi": {
+    "genre_@mochi": {
 
-      "mini_genre_#warabi": {
+      "mini_@warabi": {
         "questions1": {
           "question": "",
           "answer": ""
@@ -13,22 +13,22 @@
           "answer": ""
         }
       },
-      "mini_genre_#sakura": {
+      "mini_@sakura": {
         "questions1": {
           "question": "",
           "answer": ""
         }
       }
     },
-    "genre_name_#yo-kan":{
+    "genre_@yo-kan":{
       
-      "mini_genre_#toraya": {
+      "mini_@toraya": {
         "questions": {
           "question": "",
           "answer": ""
         }
       },
-      "mini_genre_#supermarket": {
+      "mini_@supermarket": {
         "questions": {
           "question": "",
           "answer": ""
