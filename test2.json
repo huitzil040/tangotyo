@@ -1,34 +1,21 @@
-{
-  "genre_mochi": {
+[
+  {
+    "genre": "mochi",
     "mini_warabi": [
-      {
-        "question": "",
-        "answer": ""
-      },
-      {
-        "question": "",
-        "answer": ""
-      }
+      {"question": "", "answer": ""},
+      {"question": "", "answer": ""}
     ],
     "mini_sakura": [
-      {
-        "question": "",
-        "answer": ""
-      }
+      {"question": "", "answer": ""}
     ]
   },
-  "genre_yokan": {
+  {
+    "genre": "yokan",
     "mini_toraya": [
-      {
-        "question": "",
-        "answer": ""
-      }
+      {"question": "", "answer": ""}
     ],
     "mini_supermarket": [
-      {
-        "question": "",
-        "answer": ""
-      }
+      {"question": "", "answer": ""}
     ]
   }
-}
+]
