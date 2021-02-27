@@ -1,9 +1,9 @@
 [
   {
 
-    "genre_@mochi": {
+    "genre_mochi": {
 
-      "mini_@warabi": {
+      "mini_warabi": {
         "questions1": {
           "question": "",
           "answer": ""
@@ -13,22 +13,22 @@
           "answer": ""
         }
       },
-      "mini_@sakura": {
+      "mini_sakura": {
         "questions1": {
           "question": "",
           "answer": ""
         }
       }
     },
-    "genre_@yo-kan":{
+    "genre_yo-kan":{
       
-      "mini_@toraya": {
+      "mini_toraya": {
         "questions": {
           "question": "",
           "answer": ""
         }
       },
-      "mini_@supermarket": {
+      "mini_supermarket": {
         "questions": {
           "question": "",
           "answer": ""
