@@ -1,6 +1,5 @@
-[
-  {
-    "genre": "mochi",
+[{
+  "mochi": {
     "mini_warabi": [
       {"question": "", "answer": ""},
       {"question": "", "answer": ""}
@@ -9,8 +8,7 @@
       {"question": "", "answer": ""}
     ]
   },
-  {
-    "genre": "yokan",
+  "yokan": {
     "mini_toraya": [
       {"question": "", "answer": ""}
     ],
@@ -18,4 +16,4 @@
       {"question": "", "answer": ""}
     ]
   }
-]
+}]
