@@ -24,12 +24,6 @@ let check = 0;
 
 //jsonファイル作成
 let json_maker = (originalData, fileName) => {
-  //originalData = {
-  //  id: 123,
-  //  name: "mochi",
-  //  food:["mochi","moti"]
-  //};
-  //const fileName = test.json;
   const data = JSON.stringify(originalData);
   const link = document.createElement("a");
   link.href = "data:text/plain," + encodeURIComponent(data);
@@ -41,12 +35,9 @@ let json_maker = (originalData, fileName) => {
 //json読み取り
 let json_reader = () => {
   url = "https://huitzil040.github.io/tangotyo/test1.json";
-
-  $.getJSON(url, (data) => {
+  $.getJSON(url,(data) => {
     for (let i = 0; i < data.length; i++) {
-      //console.log(data)
-      //console.log(typeof(data[i].question))
-      //console.log(`genre=${data[i].genre_name}, question=${data[i].question}, answer=${data[i].answer}`);
+      console.log(data)
       areaQ = data[i].question;
       areaA = data[i].answer;
       areaGS = data[i].genre_nameS;
@@ -57,11 +48,12 @@ let json_reader = () => {
         areaGS,
         areaGB
       });
-      //qanda_array += {areaQ:data[i].question, areaA:data[i].answer}
-      console.log(qanda_array)
     }
   });
 }
+
+json_reader();
+
 
 let random_maker = () => {
   let min = 1,
@@ -82,9 +74,6 @@ function intRandom(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-json_reader();
-console.log(qanda_array)
-console.log(qanda_array.length)
 
 //「開始する」ボタンのなかみs
 let start_quiz_part = () => {
