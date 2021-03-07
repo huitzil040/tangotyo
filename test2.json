@@ -1,19 +1,19 @@
 {
   "mochi": {
     "mini_warabi": [
-      {"question": "", "answer": ""},
-      {"question": "", "answer": ""}
+      {"question": "わらびの漢字は？", "answer": "蕨"},
+      {"question": "わらび餅に用いるデンプンが取れるのはどの部位？", "answer": "地下茎"}
     ],
     "mini_sakura": [
-      {"question": "", "answer": ""}
+      {"question": "桜餅のうち関東で多く親しまれているものは？", "answer": "長命寺"}
     ]
   },
   "yokan": {
     "mini_toraya": [
-      {"question": "", "answer": ""}
+      {"question": "虎屋が創業したのはいつ？", "answer": "室町後期"}
     ],
     "mini_supermarket": [
-      {"question": "", "answer": ""}
+      {"question": "吉原家の一番近くにあるスーパーは？", "answer": "サミット"}
     ]
   }
 }
