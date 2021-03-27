@@ -11,10 +11,9 @@ let nebtn;
 let enbtn;
 let sebtn;
 let dobtn;
+let sgbtn;
 let areaQ;
 let areaA;
-let areaGS;
-let areaGB;
 let checkR = 0;
 let random;
 let randoms = [];
@@ -31,30 +30,29 @@ let json_maker = (originalData, fileName) => {
   link.click();
 }
 
-
+let item2;
 //json読み取り
-let json_reader = () => {
-  url = "https://huitzil040.github.io/tangotyo/test1.json";
-  $.getJSON(url,(data) => {
-    for (let i = 0; i < data.length; i++) {
-      console.log(data)
-      areaQ = data[i].question;
-      areaA = data[i].answer;
-      areaGS = data[i].genre_nameS;
-      areaaB = data[i].genre_nameB;
+let json_reader = (genre,mini_genre) => {
+  url = "https://huitzil040.github.io/tangotyo/test2.json";
+  $.getJSON(url,(data) =>{
+    console.log(data);
+    console.log(data[genre]["mini_"+mini_genre]);
+    console.log(data[genre]["mini_"+mini_genre].length);
+    qanda_array = [];
+    for (let i = 0; i < data[genre]["mini_"+mini_genre].length; i++) {
+      areaQ = data[genre]["mini_"+mini_genre][i].question;
+      areaA = data[genre]["mini_"+mini_genre][i].answer;
+      console.log(areaA,areaQ);
+      //console.log(areaA,":",areaQ,":",areaGS,":",areaGB)
       qanda_array.push({
         areaQ,
         areaA,
-        areaGS,
-        areaGB
       });
     }
-  });
+  })
 }
 
-json_reader();
-
-
+//json_reader("mochi","warabi");
 let random_maker = () => {
   let min = 1,
     max = qanda_array.length;
@@ -164,13 +162,11 @@ let edit_quiz_part = () => {
   let quiz_make = () => {
     areaQ = document.querySelector("#quiz_editer").value;
     areaA = document.querySelector("#answer_editer").value;
-    areaGS = document.querySelector("#genreS_editer").value;
-    areaGB = document.querySelector("#genreB_editer").value;
+    let areaGS = document.querySelector("#genreS_editer").value;
+    let areaGB = document.querySelector("#genreB_editer").value;
     qanda_array.push({
       areaQ,
       areaA,
-      areaGS,
-      areaGB
     });
     quiz2.innerText = "登録しました";
     console.log(areaQ);
@@ -193,12 +189,31 @@ let option_quiz_part = () => {
   content.textContent = "";
   quiz.innerText = "問題データのダウンロードは→";
   quiz.innerHTML += '<button type="button" id="download_quiz">ダウンロード</button>'
-  quiz2.textContent = "";
+  quiz2.innerHTML = "</br>"
+  quiz2.innerText += "問題の出題範囲の設定";
+  // = document.querySelector("#quiz_editer").value;
   let quiz_data_download = () => {
     json_maker(qanda_array, "tangotyo_data.json")
   }
   dobtn = document.querySelector("#download_quiz");
   dobtn.addEventListener("click", quiz_data_download);
+
+  quiz2.innerHTML += '</br><textarea rows="2" cols="30" id="nowGenre" placeholder="出題範囲を入力"></textarea></br>';
+  quiz2.innerHTML += '<textarea rows="2" cols="30" id="miniGenre" placeholder="詳細範囲を入力"></textarea>';
+  quiz2.innerHTML += '<button type="button" id="send_genre">確定</button>'
+
+  let Send_genrer = () =>{
+    let nowGenre = document.querySelector("#nowGenre").value;
+    let miniGenre = document.querySelector("#miniGenre").value
+    if(nowGenre=="" || miniGenre==""){
+      json_reader("mochi","warabi")
+    }else{
+      json_reader(nowGenre,miniGenre)
+    }
+  };
+
+  sgbtn = document.querySelector("#send_genre");
+  sgbtn.addEventListener("click", Send_genrer);
 }
 
 //「開始する」ボタン
