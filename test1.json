@@ -1,20 +1,6 @@
 [
-  {
-    "genre_nameS":"mochi",
-    "genre_nameB":"mochi",
-    "question":"日本で一番高い山は？",
-    "answer":"富士山"
-  },
-  {
-    "genre_nameS":"mochi",
-    "genre_nameB":"mochi",
-    "question":"世界で一番高い山は？",
-    "answer":"エベレスト"
-  },
-  {
-    "genre_nameS":"mochi",
-    "genre_nameB":"mochi",
-    "question":"日本で二番目に高い山は？",
-    "answer":"北岳"
-  }
+  "mochi.mini_warabi",
+  "mochi.mini_sakura",
+  "yokan.mini_toraya",
+  "yokan.mini_supermarket",
 ]
