@@ -23,8 +23,7 @@ let qanda_array = [];
 let content_array = {};
 let check = 0;
 
-var test;
-var test_array = [];
+console.log("newtype_1")
 
 //目次を作る
 let table_reader =()=>{
@@ -75,7 +74,6 @@ let json_reader = (genre,mini_genre) => {
       });
     }
 }
-
 
 
 //json_reader("mochi","warabi");
@@ -189,24 +187,15 @@ let edit_quiz_part = () => {
   console.log(quiz);
   //クイズを作成する
   let quiz_make = () => {
-    areaQ = document.querySelector("#quiz_editer").value;
-    areaA = document.querySelector("#answer_editer").value;
-    let areaGS = document.querySelector("#genreS_editer").value;
-    let areaGB = document.querySelector("#genreB_editer").value;
-    qanda_array.push({
-      areaQ,
-      areaA,
-    });
+    let textQ = document.querySelector("#quiz_editer").value;
+    let textA = document.querySelector("#answer_editer").value;
+    let textGS = "mini_"+document.querySelector("#genreS_editer").value;
+    let textGB = document.querySelector("#genreB_editer").value;
+    let cont_length = content_array[textGB][textGS].length 
+
+    content_array[textGB][textGS][cont_length] = {question:textQ,answer:textA};
+    console.log(content_array);
     quiz2.innerText = "登録しました";
-    console.log(areaQ);
-    console.log(areaA);
-    console.log(areaGS);
-    console.log(qanda_array);
-    //json_maker({
-    //    id: 123,
-    //    name: "mochi",
-    //    food:[areaQ,areaA]
-    //  },"test.json");
   }
   sebtn = document.querySelector("#send_quiz");
   sebtn.addEventListener("click", quiz_make);
