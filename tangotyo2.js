@@ -17,9 +17,41 @@ let areaA;
 let checkR = 0;
 let random;
 let randoms = [];
+//アクティブにする問題配列
 let qanda_array = [];
+//問題配列の全体集合
+let content_array = {};
 let check = 0;
 
+var test;
+var test_array = [];
+
+//目次を作る
+let table_reader =()=>{
+  let table_array = [];
+  url = "https://huitzil040.github.io/tangotyo/test1.json";
+  $.getJSON(url,(data) =>{
+    console.log(data);
+    for (let i = 0; i < data.length; i++) {
+      table_array.push(data[i]);
+      console.log(table_array)
+    }
+  })
+
+  url2 = "https://huitzil040.github.io/tangotyo/test2.json";
+  $.getJSON(url2,(data) =>{
+    console.log(data);
+    for (let i = 0; i < table_array.length; i++) {
+      //console.log(table_array);
+      let connum = table_array[i];
+      content_array[connum] = data[connum] ;
+      //console.log(content_array);
+    }
+  })
+}
+
+table_reader();
+console.log(content_array);
 
 //jsonファイル作成
 let json_maker = (originalData, fileName) => {
@@ -30,27 +62,21 @@ let json_maker = (originalData, fileName) => {
   link.click();
 }
 
-let item2;
 //json読み取り
 let json_reader = (genre,mini_genre) => {
-  url = "https://huitzil040.github.io/tangotyo/test2.json";
-  $.getJSON(url,(data) =>{
-    console.log(data);
-    console.log(data[genre]["mini_"+mini_genre]);
-    console.log(data[genre]["mini_"+mini_genre].length);
+    console.log(content_array);
     qanda_array = [];
-    for (let i = 0; i < data[genre]["mini_"+mini_genre].length; i++) {
-      areaQ = data[genre]["mini_"+mini_genre][i].question;
-      areaA = data[genre]["mini_"+mini_genre][i].answer;
-      console.log(areaA,areaQ);
-      //console.log(areaA,":",areaQ,":",areaGS,":",areaGB)
+    for (let i = 0; i < content_array[genre]["mini_"+mini_genre].length; i++) {
+      areaQ = content_array[genre]["mini_"+mini_genre][i].question;
+      areaA = content_array[genre]["mini_"+mini_genre][i].answer;
       qanda_array.push({
         areaQ,
         areaA,
       });
     }
-  })
 }
+
+
 
 //json_reader("mochi","warabi");
 let random_maker = () => {
@@ -109,12 +135,15 @@ let start_quiz_part = () => {
       check = 1;
       title.innerText = "答え合わせ";
       let answer = document.querySelector("#answer").value;
+      if(answer == ""){
+        answer = "無回答";
+      };
       let correct = questionN.areaA;
       //console.log(answer);
       console.log(qanda_array);
-      content.innerText = 'あなたの回答:' + answer;
+      content.innerText = 'あなたの回答:　' + answer;
       content.innerHTML += "<br>"
-      content.innerText += '答え:' + correct;
+      content.innerText += '答え　　　　:　' + correct;
       quiz.innerHTML = '<button type="button" id="next">次の問題へ</button>';
       quiz.innerHTML += '<button type="button" id="end">終わり</button>';
       console.log(quiz);
@@ -200,11 +229,13 @@ let option_quiz_part = () => {
 
   quiz2.innerHTML += '</br><textarea rows="2" cols="30" id="nowGenre" placeholder="出題範囲を入力"></textarea></br>';
   quiz2.innerHTML += '<textarea rows="2" cols="30" id="miniGenre" placeholder="詳細範囲を入力"></textarea>';
-  quiz2.innerHTML += '<button type="button" id="send_genre">確定</button>'
+  quiz2.innerHTML += '<button type="button" id="send_genre">確定</button></br>'
 
   let Send_genrer = () =>{
     let nowGenre = document.querySelector("#nowGenre").value;
-    let miniGenre = document.querySelector("#miniGenre").value
+    let miniGenre = document.querySelector("#miniGenre").value;
+    //quiz2.innerHTMl += "<p>変更しました</p>";
+    alert("変更しました")
     if(nowGenre=="" || miniGenre==""){
       json_reader("mochi","warabi")
     }else{
