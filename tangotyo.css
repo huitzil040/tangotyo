@@ -24,6 +24,12 @@ a{
   text-decoration: none;
   color: #ffffff;
 }
+input{
+  font-size: large;
+}
+textarea{
+  font-size: large;
+}
 #content{
   margin: 32px;
 }
