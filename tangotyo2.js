@@ -191,7 +191,7 @@ let edit_quiz_part = () => {
     let textA = document.querySelector("#answer_editer").value;
     let textGS = "mini_"+document.querySelector("#genreS_editer").value;
     let textGB = document.querySelector("#genreB_editer").value;
-    let cont_length = content_array[textGB][textGS].length 
+    let cont_length = content_array[textGB][textGS].length
 
     content_array[textGB][textGS][cont_length] = {question:textQ,answer:textA};
     console.log(content_array);
@@ -211,7 +211,7 @@ let option_quiz_part = () => {
   quiz2.innerText += "問題の出題範囲の設定";
   // = document.querySelector("#quiz_editer").value;
   let quiz_data_download = () => {
-    json_maker(qanda_array, "tangotyo_data.json")
+    json_maker(content_array, "tangotyo_data.json")
   }
   dobtn = document.querySelector("#download_quiz");
   dobtn.addEventListener("click", quiz_data_download);
