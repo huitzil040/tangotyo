@@ -68,14 +68,34 @@ let json_maker = (originalData, fileName) => {
 let json_reader = (genre,mini_genre) => {
     console.log(content_array);
     qanda_array = [];
-    for (let i = 0; i < content_array[genre]["mini_"+mini_genre].length; i++) {
-      areaQ = content_array[genre]["mini_"+mini_genre][i].question;
-      areaA = content_array[genre]["mini_"+mini_genre][i].answer;
-      qanda_array.push({
-        areaQ,
-        areaA,
-      });
+    if(mini_genre == ""){
+      console.log("mini_genre=nothing");
+        for (var k in content_array[genre]) {
+          console.log("項目：" + k);
+          console.log("内容：" + content_array[genre][k]);
+          console.log(content_array[genre][k]);
+          for (let i = 0; i < content_array[genre][k].length; i++) {
+            areaQ = content_array[genre][k][i].question;
+            areaA = content_array[genre][k][i].answer;
+            qanda_array.push({
+              areaQ,
+              areaA,
+            });
+          }
+        console.log(qanda_array);
+        }
+    }else{
+      console.log("mini_genre=content");
+      for (let i = 0; i < content_array[genre]["mini_"+mini_genre].length; i++) {
+        areaQ = content_array[genre]["mini_"+mini_genre][i].question;
+        areaA = content_array[genre]["mini_"+mini_genre][i].answer;
+        qanda_array.push({
+          areaQ,
+          areaA,
+        });
+      }
     }
+
 }
 
 
@@ -181,10 +201,10 @@ let edit_quiz_part = () => {
   check = 0;
   title.innerText = "編集";
   content.textContent = "";
-  quiz.innerHTML = '<textarea rows="3" cols="25" id="quiz_editer" placeholder="問題を記入してください"></textarea></br>';
-  quiz.innerHTML += '<textarea rows="3" cols="25" id="answer_editer" placeholder="答えを記入してください"></textarea></br>';
-  quiz.innerHTML += '<textarea rows="1" cols="25" id="genreS_editer" placeholder="小ジャンルを記入してください"></textarea></br>';
-  quiz.innerHTML += '<textarea rows="1" cols="25" id="genreB_editer" placeholder="大ジャンルを記入してください"></textarea>';
+  quiz.innerHTML = '<textarea rows="3" cols="25" id="quiz_editer" placeholder="問題を入力"></textarea></br>';
+  quiz.innerHTML += '<textarea rows="3" cols="25" id="answer_editer" placeholder="答えを入力"></textarea></br>';
+  quiz.innerHTML += '<textarea rows="1" cols="25" id="genreS_editer" placeholder="小ジャンルを入力"></textarea></br>';
+  quiz.innerHTML += '<textarea rows="1" cols="25" id="genreB_editer" placeholder="大ジャンルを入力"></textarea>';
   quiz.innerHTML += '<button type="button" id="send_quiz">確定</button>'
   quiz2.textContent = "";
   //console.log(quiz);
@@ -194,19 +214,37 @@ let edit_quiz_part = () => {
     let textA = document.querySelector("#answer_editer").value;
     let textGS = "mini_"+document.querySelector("#genreS_editer").value;
     let textGB = document.querySelector("#genreB_editer").value;
+    if(!textA || !textQ || !textGB || !textGS){
+      let conf = window.confirm("記入されていない項目がありますが、このまま登録しますか？");
+      if(conf){
+        console.log(Object.keys(content_array).indexOf(textGB) !== -1);
+        //console.log(Object.keys(content_array[textGB]).indexOf(textGS) !== -1);
+        if(Object.keys(content_array).indexOf(textGB) == -1){
+          content_array[textGB] = "";
+          content_array[textGB][textGS] = {question:textQ, answer:textA};
+        }
+        console.log(content_array)
 
-    console.log(Object.keys(content_array).indexOf(textGB) !== -1);
-    //console.log(Object.keys(content_array[textGB]).indexOf(textGS) !== -1);
-    if(Object.keys(content_array).indexOf(textGB) == -1){
-      content_array[textGB] = "";
-      content_array[textGB][textGS] = {question:textQ, answer:textA};
+        let cont_length = content_array[textGB][textGS].length
+        content_array[textGB][textGS][cont_length] = {question:textQ,answer:textA};
+        console.log(content_array);
+        quiz2.innerText = "登録しました";
+      }
+    }else{
+      console.log(Object.keys(content_array).indexOf(textGB) !== -1);
+      //console.log(Object.keys(content_array[textGB]).indexOf(textGS) !== -1);
+      if(Object.keys(content_array).indexOf(textGB) !== -1){
+        content_array[textGB][textGS] = {question:textQ, answer:textA};
+        console.log(content_array[textGB])
+        console.log(content_array[textGB][textGS])
+      }
+      console.log(content_array)
+
+      let cont_length = content_array[textGB][textGS].length
+      content_array[textGB][textGS][cont_length] = {question:textQ,answer:textA};
+      console.log(content_array);
+      quiz2.innerText = "登録しました";
     }
-    console.log(content_array)
-
-    let cont_length = content_array[textGB][textGS].length
-    content_array[textGB][textGS][cont_length] = {question:textQ,answer:textA};
-    console.log(content_array);
-    quiz2.innerText = "登録しました";
   }
   sebtn = document.querySelector("#send_quiz");
   sebtn.addEventListener("click", quiz_make);
@@ -235,12 +273,16 @@ let option_quiz_part = () => {
     let nowGenre = document.querySelector("#nowGenre").value;
     let miniGenre = document.querySelector("#miniGenre").value;
     //quiz2.innerHTMl += "<p>変更しました</p>";
-    alert("変更しました")
-    if(nowGenre=="" || miniGenre==""){
-      json_reader("mochi","warabi")
+    if(nowGenre=="" && miniGenre==""){
+      alert("ジャンルが選択されていません");
     }else{
-      json_reader(nowGenre,miniGenre)
+      json_reader(nowGenre,miniGenre);
+      alert("変更しました");
+      //if(miniGenre==""){
+      //  json_reader()
+      //}
     }
+
   };
 
   sgbtn = document.querySelector("#send_genre");
