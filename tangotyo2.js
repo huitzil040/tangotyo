@@ -51,6 +51,9 @@ let table_reader =()=>{
 
 table_reader();
 console.log(content_array);
+if(content_array == {}){
+  alert("ファイルの読み取りに失敗しました");
+}
 
 //jsonファイル作成
 let json_maker = (originalData, fileName) => {
@@ -178,21 +181,29 @@ let edit_quiz_part = () => {
   check = 0;
   title.innerText = "編集";
   content.textContent = "";
-  quiz.innerHTML = '<textarea rows="3" cols="30" id="quiz_editer" placeholder="問題を記入してください"></textarea></br>';
-  quiz.innerHTML += '<textarea rows="3" cols="30" id="answer_editer" placeholder="答えを記入してください"></textarea></br>';
-  quiz.innerHTML += '<textarea rows="1" cols="30" id="genreS_editer" placeholder="小ジャンルを記入してください"></textarea></br>';
-  quiz.innerHTML += '<textarea rows="1" cols="30" id="genreB_editer" placeholder="大ジャンルを記入してください"></textarea>';
+  quiz.innerHTML = '<textarea rows="3" cols="25" id="quiz_editer" placeholder="問題を記入してください"></textarea></br>';
+  quiz.innerHTML += '<textarea rows="3" cols="25" id="answer_editer" placeholder="答えを記入してください"></textarea></br>';
+  quiz.innerHTML += '<textarea rows="1" cols="25" id="genreS_editer" placeholder="小ジャンルを記入してください"></textarea></br>';
+  quiz.innerHTML += '<textarea rows="1" cols="25" id="genreB_editer" placeholder="大ジャンルを記入してください"></textarea>';
   quiz.innerHTML += '<button type="button" id="send_quiz">確定</button>'
   quiz2.textContent = "";
-  console.log(quiz);
+  //console.log(quiz);
   //クイズを作成する
   let quiz_make = () => {
     let textQ = document.querySelector("#quiz_editer").value;
     let textA = document.querySelector("#answer_editer").value;
     let textGS = "mini_"+document.querySelector("#genreS_editer").value;
     let textGB = document.querySelector("#genreB_editer").value;
-    let cont_length = content_array[textGB][textGS].length
 
+    console.log(Object.keys(content_array).indexOf(textGB) !== -1);
+    //console.log(Object.keys(content_array[textGB]).indexOf(textGS) !== -1);
+    if(Object.keys(content_array).indexOf(textGB) == -1){
+      content_array[textGB] = "";
+      content_array[textGB][textGS] = {question:textQ, answer:textA};
+    }
+    console.log(content_array)
+
+    let cont_length = content_array[textGB][textGS].length
     content_array[textGB][textGS][cont_length] = {question:textQ,answer:textA};
     console.log(content_array);
     quiz2.innerText = "登録しました";
@@ -205,7 +216,7 @@ let option_quiz_part = () => {
   check = 0;
   title.innerText = "設定";
   content.textContent = "";
-  quiz.innerText = "問題データのダウンロードは→";
+  quiz.innerText = "問題データのダウンロード→";
   quiz.innerHTML += '<button type="button" id="download_quiz">ダウンロード</button>'
   quiz2.innerHTML = "</br>"
   quiz2.innerText += "問題の出題範囲の設定";
@@ -216,8 +227,8 @@ let option_quiz_part = () => {
   dobtn = document.querySelector("#download_quiz");
   dobtn.addEventListener("click", quiz_data_download);
 
-  quiz2.innerHTML += '</br><textarea rows="2" cols="30" id="nowGenre" placeholder="出題範囲を入力"></textarea></br>';
-  quiz2.innerHTML += '<textarea rows="2" cols="30" id="miniGenre" placeholder="詳細範囲を入力"></textarea>';
+  quiz2.innerHTML += '</br><textarea rows="2" cols="20" id="nowGenre" placeholder="出題範囲を入力"></textarea></br>';
+  quiz2.innerHTML += '<textarea rows="2" cols="20" id="miniGenre" placeholder="詳細範囲を入力"></textarea>';
   quiz2.innerHTML += '<button type="button" id="send_genre">確定</button></br>'
 
   let Send_genrer = () =>{
