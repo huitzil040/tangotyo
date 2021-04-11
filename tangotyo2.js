@@ -219,30 +219,41 @@ let edit_quiz_part = () => {
       if(conf){
         console.log(Object.keys(content_array).indexOf(textGB) !== -1);
         //console.log(Object.keys(content_array[textGB]).indexOf(textGS) !== -1);
-        if(Object.keys(content_array).indexOf(textGB) == -1){
-          content_array[textGB] = "";
-          content_array[textGB][textGS] = {question:textQ, answer:textA};
+        if(Object.keys(content_array).indexOf(textGB) !== -1){
+          console.log(Object.keys(content_array[textGB]).indexOf(textGS) == -1);
+          if(Object.keys(content_array[textGB]).indexOf(textGS) == -1){
+            //content_array[textGB][textGS] = ;
+            content_array[textGB][textGS] = [{question:textQ, answer:textA}];
+          }
+        }else{
+          content_array[textGB] = {};
+          content_array[textGB][textGS] = [{question:textQ, answer:textA}];
         }
         console.log(content_array)
 
-        let cont_length = content_array[textGB][textGS].length
-        content_array[textGB][textGS][cont_length] = {question:textQ,answer:textA};
-        console.log(content_array);
+        //let cont_length = content_array[textGB][textGS].length
+        //content_array[textGB][textGS][cont_length] = {question:textQ,answer:textA};
+        //console.log(content_array);
         quiz2.innerText = "登録しました";
       }
     }else{
       console.log(Object.keys(content_array).indexOf(textGB) !== -1);
       //console.log(Object.keys(content_array[textGB]).indexOf(textGS) !== -1);
       if(Object.keys(content_array).indexOf(textGB) !== -1){
-        content_array[textGB][textGS] = {question:textQ, answer:textA};
-        console.log(content_array[textGB])
-        console.log(content_array[textGB][textGS])
+        console.log(Object.keys(content_array[textGB]).indexOf(textGS) == -1);
+        if(Object.keys(content_array[textGB]).indexOf(textGS) == -1){
+          //content_array[textGB][textGS] = ;
+          content_array[textGB][textGS] = [{question:textQ, answer:textA}];
+        }
+      }else{
+        content_array[textGB] = {};
+        content_array[textGB][textGS] = [{question:textQ, answer:textA}];
       }
       console.log(content_array)
 
-      let cont_length = content_array[textGB][textGS].length
-      content_array[textGB][textGS][cont_length] = {question:textQ,answer:textA};
-      console.log(content_array);
+      //let cont_length = content_array[textGB][textGS].length
+      //content_array[textGB][textGS][cont_length] = {question:textQ,answer:textA};
+      //console.log(content_array);
       quiz2.innerText = "登録しました";
     }
   }
