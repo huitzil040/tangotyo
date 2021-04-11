@@ -28,7 +28,7 @@ console.log("newtype_1")
 //目次を作る
 let table_reader =()=>{
   let table_array = [];
-  url = "https://huitzil040.github.io/tangotyo/test1.json";
+  url = "https://huitzil040.github.io/tangotyo/tango_data1.json";
   $.getJSON(url,(data) =>{
     console.log(data);
     for (let i = 0; i < data.length; i++) {
@@ -37,7 +37,7 @@ let table_reader =()=>{
     }
   })
 
-  url2 = "https://huitzil040.github.io/tangotyo/test2.json";
+  url2 = "https://huitzil040.github.io/tangotyo/tango_data2.json";
   $.getJSON(url2,(data) =>{
     console.log(data);
     for (let i = 0; i < table_array.length; i++) {
@@ -271,7 +271,16 @@ let option_quiz_part = () => {
   quiz2.innerText += "問題の出題範囲の設定";
   // = document.querySelector("#quiz_editer").value;
   let quiz_data_download = () => {
-    json_maker(content_array, "tangotyo_data.json")
+    let json_make_array = [];
+    for (let c in content_array) {
+      console.log("項目：" + c);
+      console.log("内容：" + content_array[c]);
+      console.log(content_array[c]);
+      json_make_array.push(c);
+      console.log(json_make_array);
+    }
+    json_maker(content_array, "tango_data2.json");
+    json_maker(json_make_array, "tango_data1.json");
   }
   dobtn = document.querySelector("#download_quiz");
   dobtn.addEventListener("click", quiz_data_download);
