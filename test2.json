@@ -1,0 +1,53 @@
+{
+  "kobun_tango": {
+    "mini_31~60": [
+      {"question": "年ごろ", "answer": "長年"},
+      {"question": "かたち", "answer": "容貌"},
+      {"question": "影", "answer": "光・姿"},
+      {"question": "本意（ほい）", "answer": "かねてからの願い"},
+      {"question": "物語", "answer": "話・物語"},
+      {"question": "文（ふみ）", "answer": "手紙・漢詩"},
+      {"question": "程（ほど）", "answer": "時・あたり・身分・様子"},
+      {"question": "情け", "answer": "思いやり・男女間の情愛・情趣を解する心"},
+      {"question": "契り", "answer": "約束・宿縁・逢瀬"},
+      {"question": "景色", "answer": "様子・機嫌・思い"},
+      {"question": "いと", "answer": "とても・大して（〜ない）"},
+      {"question": "あまた", "answer": "たくさん"},
+      {"question": "げに", "answer": "なるほど"},
+      {"question": "なほ", "answer": "やはり"},
+      {"question": "やがて", "answer": "そのまま・すぐに"},
+      {"question": "やうやう", "answer": "だんだん"},
+      {"question": "え〜打消", "answer": "〜出来ない"},
+      {"question": "な〜そ", "answer": "〜するな"},
+      {"question": "さらに〜打消", "answer": "全く〜ない"},
+      {"question": "いかで・いかでか", "answer": "どうして（反語・疑問）・どうにかして"},
+      {"question": "匂ふ（にほふ）", "answer": "美しく照り映える"},
+      {"question": "うつろふ", "answer": "色が変わる・移る"},
+      {"question": "いぬ", "answer": "行く・過ぎ去る"},
+      {"question": "遊ぶ", "answer": "管弦を楽しむ"},
+      {"question": "愛づ（めづ）", "answer": "感嘆する・愛する"},
+      {"question": "慣らふ（ならふ）", "answer": "慣れる・親しむ"},
+      {"question": "かしづく", "answer": "大切に養育する・大切に世話をする"},
+      {"question": "頼む", "answer": "あてにする・あてにさせる"},
+      {"question": "守る", "answer": "見つめる"},
+      {"question": "聞こゆ（きこゆ）", "answer": "聞こえる・世間に知られる・理解できる"}
+     ]
+  },
+  "mochi": {
+    "mini_warabi": [
+      {"question": "わらびの漢字は？", "answer": "蕨"},
+      {"question": "わらび餅に用いるデンプンが取れるのはどの部位？", "answer": "地下茎"}
+    ],
+    "mini_sakura": [
+      {"question": "桜餅のうち関東で多く親しまれているものは？", "answer": "長命寺"}
+    ]
+  },
+  "yokan": {
+    "mini_toraya": [
+      {"question": "虎屋が創業したのはいつ？", "answer": "室町後期"}
+    ],
+    "mini_supermarket": [
+      {"question": "吉原家の一番近くにあるスーパーは？", "answer": "サミット"}
+    ]
+  }
+}

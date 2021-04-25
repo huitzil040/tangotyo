@@ -23,7 +23,37 @@ let qanda_array = [];
 let content_array = {};
 let check = 0;
 
-console.log("newtype_1")
+console.log("newtype_1");
+
+$(function(){
+        $('.upload').on('click', function(){
+            $(this).find('input').val('');
+            $(this).find('input[type="file"]').trigger('click');
+        });
+        $('.upload input[type="file"]').on('click', function(event){
+            event.stopPropagation();
+        });
+        $('.upload input[type="file"]').on('change', function(){
+            if (this.files.length) {
+                $(this).parent().find('input[disabled]')
+                    .val(this.files[0].name);
+            }
+        });
+    });
+
+let local_content_reader =()=>{
+  let form = document.forms.myform;
+  form.data_reader.addEventListener('change', function(e) {
+    let result = e.target.files[0];
+    let reader = new FileReader();
+    reader.readAsText( result );
+    reader.addEventListener( 'load', function() {
+        console.log( JSON.parse(reader.result) );
+        content_array = JSON.parse(reader.result);
+        console.log(content_array);
+    })
+  })
+}
 
 //目次を作る
 let table_reader =()=>{
@@ -49,10 +79,15 @@ let table_reader =()=>{
   })
 }
 
-table_reader();
-console.log(content_array);
-if(content_array == {}){
-  alert("ファイルの読み取りに失敗しました");
+let check_loORne = confirm("githubのファイルを読み込みますか？");
+if(check_loORne){
+  table_reader();
+  console.log(content_array);
+  if(content_array == {}){
+    alert("ファイルの読み取りに失敗しました");
+  }
+}else{
+  local_content_reader();
 }
 
 //jsonファイル作成
@@ -99,7 +134,6 @@ let json_reader = (genre,mini_genre) => {
 }
 
 
-//json_reader("mochi","warabi");
 let random_maker = () => {
   let min = 1,
     max = qanda_array.length;
@@ -242,18 +276,20 @@ let edit_quiz_part = () => {
       if(Object.keys(content_array).indexOf(textGB) !== -1){
         console.log(Object.keys(content_array[textGB]).indexOf(textGS) == -1);
         if(Object.keys(content_array[textGB]).indexOf(textGS) == -1){
+          console.log("1");
           //content_array[textGB][textGS] = ;
           content_array[textGB][textGS] = [{question:textQ, answer:textA}];
+        }else{
+          let cont_length = content_array[textGB][textGS].length
+          content_array[textGB][textGS][cont_length] = {question:textQ,answer:textA};
         }
       }else{
+        console.log("2");
         content_array[textGB] = {};
         content_array[textGB][textGS] = [{question:textQ, answer:textA}];
       }
       console.log(content_array)
 
-      //let cont_length = content_array[textGB][textGS].length
-      //content_array[textGB][textGS][cont_length] = {question:textQ,answer:textA};
-      //console.log(content_array);
       quiz2.innerText = "登録しました";
     }
   }
