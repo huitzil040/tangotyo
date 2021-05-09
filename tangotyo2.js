@@ -6,6 +6,7 @@ const edbtn = document.querySelector("#edit");
 const opbtn = document.querySelector("#option");
 const quiz = document.querySelector("#quiz");
 const quiz2 = document.querySelector("#quiz2");
+let sabtn = document.querySelector("#save");
 let qubtn;
 let nebtn;
 let enbtn;
@@ -14,6 +15,7 @@ let dobtn;
 let sgbtn;
 let areaQ;
 let areaA;
+let globalHandle;
 let checkR = 0;
 let random;
 let randoms = [];
@@ -24,6 +26,7 @@ let content_array = {};
 let check = 0;
 
 console.log("newtype_1");
+
 
 $(function(){
         $('.upload').on('click', function(){
@@ -153,6 +156,48 @@ function intRandom(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+let save_game=()=> {
+  //let new_ryoku = prompt("入力せよ");
+
+  async function writeFile(fileHandle, contents) {
+    const writable = await fileHandle.createWritable();
+    await writable.write(contents);
+    await writable.close();
+  }
+
+  const saveFileOptions = {
+  types: [
+    {
+      description: "Text Files",
+      accept: {
+        "text/plain": [".json"],
+      },
+    },
+  ],
+};
+
+  async function saveFile(content, handle) {
+    if (!handle) {
+      //handle = await window.showSaveFilePicker(saveFileOptions);
+      //console.log(handle);
+      handle = await window.showOpenFilePicker(saveFileOptions);
+      handle = handle[0];
+      //console.log(handleSub)
+      console.log(handle);
+      console.log("!handle");
+    }
+    await writeFile(handle, content);
+    return handle;
+  }
+
+  (async ()=> {
+    /* 上書き保存（初回はglobalHandleがundefinedなので[名前をつけて保存]を実行）*/
+    console.log(globalHandle);
+    const jData = JSON.stringify(content_array);
+    globalHandle = await saveFile(jData, globalHandle);
+    console.log("conplete");
+  })();
+}
 
 //「開始する」ボタンのなかみs
 let start_quiz_part = () => {
@@ -379,6 +424,7 @@ let option_quiz = () => {
     option_quiz_part();
   }
 }
+sabtn.addEventListener("click", save_game);
 stbtn.addEventListener("click", start_quiz);
 edbtn.addEventListener("click", edit_quiz);
 opbtn.addEventListener("click", option_quiz);

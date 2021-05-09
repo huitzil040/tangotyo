@@ -55,6 +55,10 @@ textarea{
   border-color: rgba(#000000, 0.41);
   border-radius: 10px;
 }
+#save{
+  background-color: #66ebbb;
+  color: #000000;
+}
 form .upload::before {
        display: inline-block;
        content: '';
