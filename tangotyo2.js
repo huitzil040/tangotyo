@@ -158,7 +158,6 @@ function intRandom(min, max) {
 
 let save_game=()=> {
   //let new_ryoku = prompt("入力せよ");
-
   async function writeFile(fileHandle, contents) {
     const writable = await fileHandle.createWritable();
     await writable.write(contents);
@@ -307,6 +306,89 @@ let edit_quiz_part = () => {
         }else{
           content_array[textGB] = {};
           content_array[textGB][textGS] = [{question:textQ, answer:textA}];
+          let conf2 = window.confirm("新しい詳細範囲を指定しています。ローカルに保存しますか？");
+          if(conf2){
+            let conf3 = window.confirm("既存のセーブデータに保存しますか？");
+            if(conf3){
+              async function writeFile(fileHandle, contents) {
+                const writable = await fileHandle.createWritable();
+                await writable.write(contents);
+                await writable.close();
+              }
+
+              const saveFileOptions = {
+              types: [
+                {
+                  description: "Text Files",
+                  accept: {
+                    "text/plain": [".json"],
+                  },
+                },
+              ],
+            };
+
+              async function saveFile(content, handle) {
+                if (!handle) {
+                  //handle = await window.showSaveFilePicker(saveFileOptions);
+                  //console.log(handle);
+                  handle = await window.showOpenFilePicker(saveFileOptions);
+                  handle = handle[0];
+                  //console.log(handleSub)
+                  console.log(handle);
+                  console.log("!handle");
+                }
+                await writeFile(handle, content);
+                return handle;
+              }
+
+              (async ()=> {
+                /* 上書き保存（初回はglobalHandleがundefinedなので[名前をつけて保存]を実行）*/
+                console.log(globalHandle);
+                const jData = JSON.stringify(content_array);
+                globalHandle = await saveFile(jData, globalHandle);
+                console.log("conplete");
+              })();
+            }else{
+              async function writeFile(fileHandle, contents) {
+                const writable = await fileHandle.createWritable();
+                await writable.write(contents);
+                await writable.close();
+              }
+
+              const saveFileOptions = {
+              types: [
+                {
+                  description: "Text Files",
+                  accept: {
+                    "text/plain": [".json"],
+                  },
+                },
+              ],
+            };
+
+              async function saveFile(content, handle) {
+                if (!handle) {
+                  //handle = await window.showSaveFilePicker(saveFileOptions);
+                  //console.log(handle);
+                  handle = await window.showSaveFilePicker(saveFileOptions);
+                  //handle = handle[0];
+                  //console.log(handleSub)
+                  console.log(handle);
+                  console.log("!handle");
+                }
+                await writeFile(handle, content);
+                return handle;
+              }
+
+              (async ()=> {
+                /* 上書き保存（初回はglobalHandleがundefinedなので[名前をつけて保存]を実行）*/
+                console.log(globalHandle);
+                const jData = JSON.stringify(content_array);
+                globalHandle = await saveFile(jData, globalHandle);
+                console.log("conplete");
+              })();
+            }
+          }
         }
         console.log(content_array)
 
@@ -329,9 +411,91 @@ let edit_quiz_part = () => {
           content_array[textGB][textGS][cont_length] = {question:textQ,answer:textA};
         }
       }else{
-        console.log("2");
         content_array[textGB] = {};
         content_array[textGB][textGS] = [{question:textQ, answer:textA}];
+        let conf2 = window.confirm("新しい詳細範囲を指定しています。ローカルに保存しますか？");
+        if(conf2){
+          let conf3 = window.confirm("既存のセーブデータに保存しますか？");
+          if(conf3){
+            async function writeFile(fileHandle, contents) {
+              const writable = await fileHandle.createWritable();
+              await writable.write(contents);
+              await writable.close();
+            }
+
+            const saveFileOptions = {
+            types: [
+              {
+                description: "Text Files",
+                accept: {
+                  "text/plain": [".json"],
+                },
+              },
+            ],
+          };
+
+            async function saveFile(content, handle) {
+              if (!handle) {
+                //handle = await window.showSaveFilePicker(saveFileOptions);
+                //console.log(handle);
+                handle = await window.showOpenFilePicker(saveFileOptions);
+                handle = handle[0];
+                //console.log(handleSub)
+                console.log(handle);
+                console.log("!handle");
+              }
+              await writeFile(handle, content);
+              return handle;
+            }
+
+            (async ()=> {
+              /* 上書き保存（初回はglobalHandleがundefinedなので[名前をつけて保存]を実行）*/
+              console.log(globalHandle);
+              const jData = JSON.stringify(content_array);
+              globalHandle = await saveFile(jData, globalHandle);
+              console.log("conplete");
+            })();
+          }else{
+            async function writeFile(fileHandle, contents) {
+              const writable = await fileHandle.createWritable();
+              await writable.write(contents);
+              await writable.close();
+            }
+
+            const saveFileOptions = {
+            types: [
+              {
+                description: "Text Files",
+                accept: {
+                  "text/plain": [".json"],
+                },
+              },
+            ],
+          };
+
+            async function saveFile(content, handle) {
+              if (!handle) {
+                //handle = await window.showSaveFilePicker(saveFileOptions);
+                //console.log(handle);
+                handle = await window.showSaveFilePicker(saveFileOptions);
+                //handle = handle[0];
+                //console.log(handleSub)
+                console.log(handle);
+                console.log("!handle");
+              }
+              await writeFile(handle, content);
+              return handle;
+            }
+
+            (async ()=> {
+              /* 上書き保存（初回はglobalHandleがundefinedなので[名前をつけて保存]を実行）*/
+              console.log(globalHandle);
+              const jData = JSON.stringify(content_array);
+              globalHandle = await saveFile(jData, globalHandle);
+              console.log("conplete");
+            })();
+          }
+        }
       }
       console.log(content_array)
 
